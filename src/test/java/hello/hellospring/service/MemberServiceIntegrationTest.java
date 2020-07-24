@@ -15,8 +15,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @Transactional
 class MemberServiceIntegrationTest {
 
-    @Autowired MemberService memberService;
-    @Autowired MemberRepository memberRepository;
+    @Autowired
+    MemberService memberService;
+    @Autowired
+    MemberRepository memberRepository;
 
     @Test
     public void 회원가입() throws Exception {
@@ -43,7 +45,7 @@ class MemberServiceIntegrationTest {
 
         //When
         memberService.join(member1);
-        IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+        IllegalStateException e = assertThrows(IllegalStateException.class,
                 () -> memberService.join(member2));//예외가 발생해야 한다.
         assertThat(e.getMessage()).isEqualTo("이미 존재하는 회원입니다.");
     }
